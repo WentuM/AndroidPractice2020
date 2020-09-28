@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_save"
-        android:title="Edit"
-        android:icon="@drawable/ic_save_foreground"
+        android:id="@+id/menu_cancel"
+        android:title="Cancel"
+        android:icon="@drawable/ic_cancel_foreground"
         app:showAsAction="always"
         />
 
     <item
-        android:id="@+id/menu_cancel"
-        android:title="Cancel"
-        android:icon="@drawable/ic_cancel_foreground"
+        android:id="@+id/menu_save"
+        android:title="Edit"
+        android:icon="@drawable/ic_save_foreground"
         app:showAsAction="always"
         />
     </menu>
