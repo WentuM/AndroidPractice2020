@@ -2,15 +2,10 @@ package com.example.androidpractice2020
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 
 
@@ -20,8 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        //Настраиваем для нее обработчик нажатий OnClickListener:
-        btn_picture.setOnClickListener { //Вызываем стандартную галерею для выбора изображения с помощью Intent.ACTION_PICK:
+        btn_picture.setOnClickListener {
+            //Вызываем стандартную галерею для выбора изображения с помощью Intent.ACTION_PICK:
             val photoPickerIntent = Intent(Intent.ACTION_PICK)
             //Тип получаемых объектов - image:
             photoPickerIntent.type = "image/*"
@@ -39,15 +34,12 @@ class MainActivity : AppCompatActivity() {
                     val imageUri = imageReturnedIntent?.data
                     val photoPickerIntent = Intent().apply {
                         action = Intent.ACTION_SEND
-                        putExtra("img", imageUri.toString());
-                        val text = "Важное сообщение"
-                        putExtra(Intent.EXTRA_TEXT, text)
+                        putExtra("img", imageUri.toString())
                         //в другом intent data=null
                         data = imageUri
                         type = "image/uri"
                     }
                     startActivity(photoPickerIntent)
-                    //finish не могу вызвать :D
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
                 }
