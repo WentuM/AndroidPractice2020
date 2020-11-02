@@ -1,6 +1,9 @@
 package com.example.androidpractice2020.recyclerview
 
 
-data class Note(
-    val title: String, val description: String, val position: Int
-)
+class Note(
+    val title: String, val description: String, val id: Int
+) {
+    fun rep() : Note = Note(this.title, this.description, this.id)
+}
+
