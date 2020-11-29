@@ -3,6 +3,7 @@ package com.example.androidpractice2020.recyclerview
 import com.example.androidpractice2020.R
 
 object SongRepository {
+
     val songList: ArrayList<Song> = arrayListOf(
         Song(
             "Monday",
