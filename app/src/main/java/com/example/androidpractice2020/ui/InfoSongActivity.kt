@@ -64,18 +64,21 @@ class InfoSongActivity : AppCompatActivity() {
         }
         info_prev.setOnClickListener {
             if (isBound) {
-                if (isBound) {
-                    id -= 1
-                    if (id < 0) {
-                        id = size - 1
-                    }
-                    val intent = Intent(this, InfoSongActivity::class.java)
-                    intent.putExtra("id", id)
-                    intent.putExtra("listSize", size)
-                    overridePendingTransition(R.anim.right_in, R.anim.alpha)
-                    startActivity(intent)
-                    finish()
+                id -= 1
+                if (id < 0) {
+                    id = size - 1
                 }
+                val intent = Intent(this, InfoSongActivity::class.java)
+                intent.putExtra("id", id)
+                intent.putExtra("listSize", size)
+                overridePendingTransition(R.anim.right_in, R.anim.alpha)
+                startActivity(intent)
+                finish()
+            }
+        }
+        info_stop.setOnClickListener {
+            if (isBound) {
+                musicService?.stopSound()
             }
         }
     }

@@ -122,7 +122,8 @@ class SoundService : Service() {
 
     fun stopSound() {
         if (mediaPlayer != null) {
-            mediaPlayer?.pause()
+            mediaPlayer?.stop()
+            stopSelf()
         }
     }
 

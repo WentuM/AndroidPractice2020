@@ -72,4 +72,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info_seekBar" />
 
+    <Button
+        android:id="@+id/info_stop"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_stop_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info_image" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
