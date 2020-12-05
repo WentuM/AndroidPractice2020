@@ -14,23 +14,17 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.androidpractice2020.R
+import com.example.androidpractice2020.notification.CreateNotification
+import com.example.androidpractice2020.recyclerview.Song
 import com.example.androidpractice2020.ui.InfoSongActivity
 import javax.security.auth.callback.Callback
 
 
 class SoundService : Service() {
 
-    val CONST_ACTION_MAIN = "ACTION_MAIN"
-    val CONST_ACTION_PLAY = "ACTION_PLAY"
-    val CONST_ACTION_NEXT = "ACTION_NEXT"
-    val CONST_ACTION_PREV = "ACTION_PREV"
-    val CONST_ACTION_STOP = "ACTION_STOP"
-    private lateinit var listener: Callback
-    private var id = -1
-    private var song: Int? = null
-
     private var mediaPlayer: MediaPlayer? = null
     private var mBinder = MyBinder()
+    private var song: Song? = null
 
 
     inner class MyBinder : Binder() {
@@ -53,67 +47,45 @@ class SoundService : Service() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (mediaPlayer != null) {
-            mediaPlayer?.stop()
-        } else {
-            launchForeground()
-        }
-        id = intent?.getIntExtra("idSong", -1)!!
-        song = intent.getIntExtra("mp3", -1)
-
-//        if (intent.action == CONST_ACTION_PLAY) {
-//            playOrStopMusic(song)
-//        }
-        if (intent.action == CONST_ACTION_STOP) {
-            mediaPlayer?.stop()
-            (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).cancel(1)
-            stopSelf()
-            return START_NOT_STICKY
-        }
-//        if (intent?.action == CONST_ACTION_NEXT) {
-//            playNextSong()
-//        }
         return START_NOT_STICKY
     }
 
-    private fun playSpecificMusic(song: Int) {
+    fun playSpecificMusic(song: Song, context: Context) {
         mediaPlayer?.stop()
-        mediaPlayer = MediaPlayer.create(this, song)
+        mediaPlayer = MediaPlayer.create(this, song.audio)
+        this.song = song
+        CreateNotification.createNotif(
+            context, song, song.id
+        )
         mediaPlayer?.start()
     }
 
-
-    fun setListener(listener: Callback) {
-        this.listener = listener
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
-    fun playOrStopMusic(song: Int?) {
-        Toast.makeText(
-            this, "Play or Stop",
-            Toast.LENGTH_SHORT
-        ).show()
+    fun playOrStopMusic(song: Song?, context: Context) {
         if (mediaPlayer == null) {
-            mediaPlayer = song?.let { MediaPlayer.create(this, it) }
-            mediaPlayer?.start()
-            Toast.makeText(
-                this, "1",
-                Toast.LENGTH_SHORT
-            ).show()
-        } else if (mediaPlayer != null && !mediaPlayer!!.isPlaying) {
-            Toast.makeText(
-                this, "2",
-                Toast.LENGTH_SHORT
-            ).show()
             if (song != null) {
-                playSpecificMusic(song)
+                mediaPlayer = song.audio.let { MediaPlayer.create(this, it) }
             }
+
+            if (song != null) {
+                CreateNotification.createNotif(
+                    context, song, song.id
+                )
+            }
+
+            this.song = song
             mediaPlayer?.start()
+        } else if (mediaPlayer != null && !mediaPlayer!!.isPlaying) {
+
+            if (this.song != song) {
+
+                if (song != null) {
+                    playSpecificMusic(song, context)
+                }
+            } else {
+                mediaPlayer?.start()
+            }
         } else if (mediaPlayer != null && mediaPlayer!!.isPlaying) {
-            Toast.makeText(
-                this, "3",
-                Toast.LENGTH_SHORT
-            ).show()
             mediaPlayer?.let {
                 it.pause()
             }
@@ -155,60 +127,5 @@ class SoundService : Service() {
             }
 
         }, 0)
-    }
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun launchForeground() {
-
-        val notificationIntent: Intent = Intent(this, InfoSongActivity::class.java)
-        notificationIntent.putExtra("id", id)
-        notificationIntent.action = CONST_ACTION_MAIN
-
-        notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
-
-        val previousIntent = Intent(this, SoundService::class.java)
-        previousIntent.action = CONST_ACTION_PREV
-        val pPreviousIntent: PendingIntent = PendingIntent.getService(this, 0, previousIntent, 0)
-
-        val playIntent = Intent(this, SoundService::class.java)
-        playIntent.action = CONST_ACTION_PLAY
-        val pPlayIntent: PendingIntent = PendingIntent.getService(this, 0, playIntent, 0)
-
-        val stopIntent = Intent(this, SoundService::class.java)
-        playIntent.action = CONST_ACTION_STOP
-        val pStopIntent: PendingIntent = PendingIntent.getService(this, 0, stopIntent, 0)
-
-        val nextIntent = Intent(this, SoundService::class.java)
-        nextIntent.action = CONST_ACTION_NEXT
-        val pNextIntent: PendingIntent = PendingIntent.getService(this, 0, nextIntent, 0)
-
-
-        val CHANNEL_ID = "my_channel_01"
-        val channel = NotificationChannel(
-            CHANNEL_ID,
-            "Channel title",
-            NotificationManager.IMPORTANCE_DEFAULT
-        )
-
-        (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).createNotificationChannel(
-            channel
-        )
-
-        val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle("Music PLayer")
-            .setTicker("MPlayer")
-            .setContentText("Content Text")
-            .setContentIntent(pendingIntent)
-            .setOngoing(true)
-            .addAction(android.R.drawable.ic_media_previous, "Previous", pPreviousIntent)
-            .addAction(android.R.drawable.ic_media_play, "Play/Pause", pPlayIntent)
-            .addAction(android.R.drawable.ic_media_next, "Next", pNextIntent)
-            .addAction(android.R.drawable.ic_media_pause, "Stop", pStopIntent)
-            .build()
-
-        startForeground(1, notification)
     }
 }
