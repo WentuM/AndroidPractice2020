@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/city_icon_geo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/city_name"
+        app:layout_constraintStart_toEndOf="@+id/city_name"
+        app:layout_constraintTop_toTopOf="@+id/city_name" />
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_margin="100dp"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/city_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="60sp"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_margin="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_name" />
+
+    <TextView
+        android:id="@+id/city_description"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_margin="12dp"
+        android:textSize="23sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_temp" />
+
+
+    <TextView
+        android:id="@+id/wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="ВЕТЕР"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_description" />
+
+    <TextView
+        android:id="@+id/direction_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:text="Направление ветра: "
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wind" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="36dp"
+        android:background="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/direction_wind" />
+
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center"
+        android:text="ВЛАЖНОСТЬ"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/number_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="36dp"
+        android:gravity="center"
+        android:text="Влажность: "
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/humidity" />
+</androidx.constraintlayout.widget.ConstraintLayout>
