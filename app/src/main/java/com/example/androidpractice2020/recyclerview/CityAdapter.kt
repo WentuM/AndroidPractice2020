@@ -17,4 +17,6 @@ class CityAdapter(var list: ArrayList<InfoCity>, var itemClick: (Int) -> Unit): 
     }
 
     override fun onBindViewHolder(holder: CityHolder, position: Int) = holder.bind(list[position])
+
+
 }

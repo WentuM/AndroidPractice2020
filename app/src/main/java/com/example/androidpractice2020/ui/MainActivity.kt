@@ -71,19 +71,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         locationConnect()
-        val list = city_list
-        list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        if (citiesList.size != 0) {
-            list.adapter =
-                CityAdapter(
-                    citiesList
-                ) {
-                    val intent = Intent(this, DetailCityActivity::class.java)
-                    intent.putExtra("id", it)
-                    intent.putExtra("size", citiesList.size)
-                    startActivity(intent)
-                }
-        }
         super.onResume()
     }
 
@@ -91,6 +78,21 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             api.getCitiesWeather(latitude, longitude, 15).let {
                 citiesList = it.list as ArrayList<InfoCity>
+
+                val list = city_list
+                list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+                if (citiesList.size != 0) {
+                    list.adapter =
+                        CityAdapter(
+                            citiesList
+                        ) {
+                            val intent = Intent(context, DetailCityActivity::class.java)
+                            intent.putExtra("id", it)
+                            intent.putExtra("size", citiesList.size)
+                            startActivity(intent)
+                        }
+                }
+
             }
         }
     }
@@ -108,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                 if (location == null) {
 
                     loadCityAroundUser(this, latitude, longitude)
+
                 } else {
                     longitude = location.longitude
                     latitude = location.latitude
