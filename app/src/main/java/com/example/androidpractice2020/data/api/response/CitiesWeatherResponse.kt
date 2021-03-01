@@ -1,9 +1,9 @@
-package com.example.androidpractice2020.factory
+package com.example.androidpractice2020.data.api.response
 
 data class CitiesWeatherResponse(
     val cod: String,
     val count: Int,
-    val list: List<InfoCity>,
+    val list: ArrayList<InfoCity>,
     val message: String
 )
 
