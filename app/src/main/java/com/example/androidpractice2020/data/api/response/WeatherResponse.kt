@@ -1,4 +1,4 @@
-package com.example.androidpractice2020.factory
+package com.example.androidpractice2020.data.api.response
 
 
 data class WeatherResponse(

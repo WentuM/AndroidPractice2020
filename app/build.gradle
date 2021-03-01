@@ -12,12 +12,19 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        apply plugin: 'kotlin-kapt'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+
     androidExtensions {
         experimental = true
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -55,6 +62,18 @@ dependencies {
 
 
 
+    def room_version = "2.2.6"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+
+
     // region Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
@@ -75,8 +94,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-
-
 
 }

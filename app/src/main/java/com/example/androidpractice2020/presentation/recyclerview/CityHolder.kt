@@ -1,23 +1,23 @@
-package com.example.androidpractice2020.recyclerview
+package com.example.androidpractice2020.presentation.recyclerview
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidpractice2020.factory.InfoCity
 import kotlinx.android.extensions.LayoutContainer
 import com.example.androidpractice2020.R
+import com.example.androidpractice2020.data.City
 import kotlinx.android.synthetic.main.city_item.*
 
 class CityHolder(override val containerView: View, var itemClick: (Int) -> Unit) :
     RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    fun bind(city: InfoCity) {
+    fun bind(city: City) {
 
         text_name_list.text = city.name
-        text_temp_list.text = "${city.main.temp} \u2103"
+        text_temp_list.text = "${city.temp} \u2103"
 
-        when(city.main.temp) {
+        when(city.temp) {
             in -30.0..-18.0 -> text_temp_list.setTextColor(-65536)
             in -18.0..-6.0 -> text_temp_list.setTextColor(-256)
             in -6.0..6.0 -> text_temp_list.setTextColor(-16711681)

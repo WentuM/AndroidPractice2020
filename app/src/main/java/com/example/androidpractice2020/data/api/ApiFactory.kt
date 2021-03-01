@@ -1,4 +1,4 @@
-package com.example.androidpractice2020.factory
+package com.example.androidpractice2020.data.api
 
 import com.example.androidpractice2020.BuildConfig
 import okhttp3.Interceptor
@@ -53,7 +53,9 @@ object ApiFactory {
     }
 
     val weatherApi by lazy {
-        retrofit.create(WeatherApi::class.java)
+        retrofit.create(
+            WeatherApi::class.java
+        )
     }
 
 
