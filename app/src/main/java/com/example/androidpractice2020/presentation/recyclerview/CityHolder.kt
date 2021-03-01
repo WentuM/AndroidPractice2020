@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import com.example.androidpractice2020.R
-import com.example.androidpractice2020.data.City
+import com.example.androidpractice2020.data.database.entity.City
 import kotlinx.android.synthetic.main.city_item.*
 
 class CityHolder(override val containerView: View, var itemClick: (Int) -> Unit) :

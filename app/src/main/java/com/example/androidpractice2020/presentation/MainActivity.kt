@@ -12,8 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.androidpractice2020.R
-import com.example.androidpractice2020.data.City
-import com.example.androidpractice2020.data.WeatherApplication
+import com.example.androidpractice2020.data.database.entity.City
+import com.example.androidpractice2020.application.WeatherApplication
 import com.example.androidpractice2020.domain.FindCityUseCase
 import com.example.androidpractice2020.presentation.recyclerview.CityAdapter
 import com.google.android.gms.location.FusedLocationProviderClient

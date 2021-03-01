@@ -1,6 +1,6 @@
 package com.example.androidpractice2020.domain
 
-import com.example.androidpractice2020.data.City
+import com.example.androidpractice2020.data.database.entity.City
 
 interface WeatherRepository {
 

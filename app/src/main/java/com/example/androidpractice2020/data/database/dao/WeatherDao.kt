@@ -1,9 +1,10 @@
-package com.example.androidpractice2020.data
+package com.example.androidpractice2020.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.androidpractice2020.data.database.entity.City
 
 @Dao
 interface WeatherDao {

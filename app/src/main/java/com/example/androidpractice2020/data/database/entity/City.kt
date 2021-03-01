@@ -1,10 +1,9 @@
-package com.example.androidpractice2020.data
+package com.example.androidpractice2020.data.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.androidpractice2020.data.api.response.InfoCity
-import kotlinx.coroutines.withContext
 
 @Entity(tableName = "city")
 data class City(

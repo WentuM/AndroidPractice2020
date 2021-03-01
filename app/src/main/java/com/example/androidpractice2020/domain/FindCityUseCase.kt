@@ -1,10 +1,7 @@
 package com.example.androidpractice2020.domain
 
-import android.content.Context
-import com.example.androidpractice2020.data.City
-import com.example.androidpractice2020.data.WeatherRepositoryImpl
-import com.example.androidpractice2020.data.api.response.CitiesWeatherResponse
-import com.example.androidpractice2020.data.api.response.WeatherResponse
+import com.example.androidpractice2020.data.database.entity.City
+import com.example.androidpractice2020.data.database.repository.WeatherRepositoryImpl
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 

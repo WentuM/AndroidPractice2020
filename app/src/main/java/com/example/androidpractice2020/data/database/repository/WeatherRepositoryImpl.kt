@@ -1,6 +1,8 @@
-package com.example.androidpractice2020.data
+package com.example.androidpractice2020.data.database.repository
 
 import com.example.androidpractice2020.data.api.WeatherApi
+import com.example.androidpractice2020.data.database.dao.WeatherDao
+import com.example.androidpractice2020.data.database.entity.City
 import com.example.androidpractice2020.domain.WeatherRepository
 import java.lang.Exception
 import java.net.UnknownHostException

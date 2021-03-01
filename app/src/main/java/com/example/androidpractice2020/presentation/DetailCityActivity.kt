@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.androidpractice2020.R
-import com.example.androidpractice2020.data.WeatherApplication
-import com.example.androidpractice2020.data.WeatherDao
-import com.example.androidpractice2020.data.WeatherRepositoryImpl
+import com.example.androidpractice2020.application.WeatherApplication
 import com.example.androidpractice2020.data.api.ApiFactory
 import com.example.androidpractice2020.domain.FindCityUseCase
 import kotlinx.android.synthetic.main.activity_detail_city.*
