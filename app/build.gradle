@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -12,7 +13,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        apply plugin: 'kotlin-kapt'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +46,7 @@ android {
 }
 
 def retrofit = "2.9.0"
+def moxy = "2.2.1"
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -90,6 +91,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.8' // 3.13.+ require minSDK 21
+
+    //Moxy
+    implementation "com.github.moxy-community:moxy:$moxy"
+    implementation "com.github.moxy-community:moxy-androidx:$moxy"
+    implementation "com.github.moxy-community:moxy-ktx:$moxy"
+    kapt "com.github.moxy-community:moxy-compiler:$moxy"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
