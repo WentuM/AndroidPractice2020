@@ -1,4 +1,4 @@
-package com.example.androidpractice2020.presentation
+package com.example.androidpractice2020.presentation.view
 
 import com.example.androidpractice2020.data.database.entity.City
 import moxy.MvpView

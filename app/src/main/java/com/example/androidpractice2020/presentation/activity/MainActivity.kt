@@ -1,13 +1,11 @@
-package com.example.androidpractice2020.presentation
+package com.example.androidpractice2020.presentation.activity
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.SearchView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,16 +14,20 @@ import com.example.androidpractice2020.application.WeatherApplication
 import com.example.androidpractice2020.data.LocationRepositoryImpl
 import com.example.androidpractice2020.data.database.entity.City
 import com.example.androidpractice2020.domain.FindCityUseCase
+import com.example.androidpractice2020.presentation.view.MainView
+import com.example.androidpractice2020.presentation.presenter.MainPresenter
 import com.example.androidpractice2020.presentation.recyclerview.CityAdapter
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
+import moxy.MvpAppCompatActivity
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : MvpAppCompatActivity(),
+    MainView {
 
     private var citiesList: ArrayList<City> = arrayListOf()
     private var permissionGeoLocation: Boolean = false
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity(), MainView {
         setContentView(R.layout.activity_main)
         getPermissionGeoLocation()
 
-        Log.d("qwe7", "aeqw")
         createSearchView()
     }
 
@@ -114,23 +115,22 @@ class MainActivity : AppCompatActivity(), MainView {
         })
     }
 
-    private fun initPresenter() = MainPresenter(
-        locationRepositoryImpl = LocationRepositoryImpl(
-            client = LocationServices.getFusedLocationProviderClient(this)
-        ),
-        findCityUseCase = FindCityUseCase(
-            (application as WeatherApplication).repository, Dispatchers.IO
+    private fun initPresenter() =
+        MainPresenter(
+            locationRepositoryImpl = LocationRepositoryImpl(
+                client = LocationServices.getFusedLocationProviderClient(this)
+            ),
+            findCityUseCase = FindCityUseCase(
+                (application as WeatherApplication).repository, Dispatchers.IO
+            )
         )
-    )
 
     override fun showLoading() {
         progress_list.visibility = View.VISIBLE
-        Log.d("qwe9", "weqwewqew")
     }
 
     override fun hideLoading() {
         progress_list.visibility = View.GONE
-        Log.d("qwe8", "qweqwewq")
     }
 
     override fun consumeError(throwable: Throwable) {
