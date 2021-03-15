@@ -7,7 +7,7 @@ import moxy.viewstate.strategy.alias.OneExecution
 import moxy.viewstate.strategy.alias.Skip
 
 @AddToEndSingle
-interface MainView: MvpView {
+interface MainView : MvpView {
 
     fun showLoading()
 
@@ -16,7 +16,7 @@ interface MainView: MvpView {
     @Skip
     fun consumeError(throwable: Throwable)
 
-    fun showWeather()
+    fun navigateToDetailActivity(id: Int)
 
     fun getListCities(arrayCity: ArrayList<City>)
 

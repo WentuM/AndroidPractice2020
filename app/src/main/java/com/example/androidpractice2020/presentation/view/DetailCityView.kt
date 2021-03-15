@@ -7,12 +7,23 @@ import moxy.viewstate.strategy.alias.OneExecution
 import moxy.viewstate.strategy.alias.Skip
 
 @AddToEndSingle
-interface DetailCityView: MvpView {
+interface DetailCityView : MvpView {
 
     @Skip
     fun consumeError(throwable: Throwable)
 
-    fun showCityWeather(city: City)
+    fun setNameCity(name: String)
+
+    fun setTempCity(temp: Double)
+
+    fun setDescrCity(description: String)
+
+    fun setHumidityCity(humidity: Int)
+
+    fun setDegCity(deg: Int)
+
+    fun setIconCity()
+
 
     fun showLoading()
 

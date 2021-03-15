@@ -48,15 +48,17 @@ class MainPresenter(
         }
     }
 
-    fun searchCityForName(cityName: String?): Int {
-        var id: Int = 0
+    fun searchCityForName(cityName: String?) {
         presenterScope.launch {
             cityName?.let {
                 findCityUseCase.findWeatherCityByName(cityName).let {
-                    id = it.id
+                    try {
+                        viewState.navigateToDetailActivity(it.id)
+                    } catch (throwable: Throwable) {
+                        viewState.consumeError(throwable)
+                    }
                 }
             }
         }
-        return id
     }
 }

@@ -14,9 +14,9 @@ import com.example.androidpractice2020.application.WeatherApplication
 import com.example.androidpractice2020.data.LocationRepositoryImpl
 import com.example.androidpractice2020.data.database.entity.City
 import com.example.androidpractice2020.domain.FindCityUseCase
-import com.example.androidpractice2020.presentation.view.MainView
 import com.example.androidpractice2020.presentation.presenter.MainPresenter
 import com.example.androidpractice2020.presentation.recyclerview.CityAdapter
+import com.example.androidpractice2020.presentation.view.MainView
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
@@ -92,19 +92,7 @@ class MainActivity : MvpAppCompatActivity(),
         search_view.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(cityName: String?): Boolean {
-                var id = presenter.searchCityForName(cityName)
-                if (id != -1) {
-                    val intent =
-                        Intent(this@MainActivity, DetailCityActivity::class.java)
-                    intent.putExtra("id", id)
-                    startActivity(intent)
-                } else {
-                    Snackbar.make(
-                        findViewById(android.R.id.content),
-                        "Город с таким названием не найден",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
+                presenter.searchCityForName(cityName)
                 return false
             }
 
@@ -134,11 +122,28 @@ class MainActivity : MvpAppCompatActivity(),
     }
 
     override fun consumeError(throwable: Throwable) {
-        TODO("Not yet implemented")
+        throwable.message?.let {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                it,
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
-    override fun showWeather() {
-        TODO("Not yet implemented")
+    override fun navigateToDetailActivity(id: Int) {
+        if (id != -1) {
+            val intent =
+                Intent(this@MainActivity, DetailCityActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+        } else {
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                "Город с таким названием не найден",
+                Snackbar.LENGTH_LONG
+            ).show()
+        }
     }
 
     override fun getListCities(arrayCity: ArrayList<City>) {

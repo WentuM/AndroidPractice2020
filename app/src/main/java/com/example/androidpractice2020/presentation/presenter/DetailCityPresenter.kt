@@ -15,11 +15,17 @@ class DetailCityPresenter(
         presenterScope.launch {
             findCityUseCase.findWeatherCityById(id).let {
                 try {
-                    viewState.showCityWeather(it)
+                    viewState.apply {
+                        setNameCity(it.name)
+                        setDescrCity(it.description)
+                        setDegCity(it.deg)
+                        setHumidityCity(it.numbHumidity)
+                        setIconCity()
+                        setTempCity(it.temp)
+                    }
                 } catch (throwable: Throwable) {
                     viewState.consumeError(throwable)
-                }
-                finally {
+                } finally {
                     viewState.hideLoading()
                 }
             }
